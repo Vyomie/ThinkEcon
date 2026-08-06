@@ -47,10 +47,12 @@ export function DepartmentScroller() {
   }, []);
 
   return <section className="department-scroll">
-    <div className="department-morph" aria-live="polite">
-      <div key={departments[active].title} className="department-morph-copy">
-        <h2>{departments[active].title}</h2>
-        <span>{departments[active].caption}</span>
+    <div className="department-morph-layer">
+      <div className="department-morph" aria-live="polite">
+        <div key={departments[active].title} className="department-morph-copy">
+          <h2>{departments[active].title}</h2>
+          <span>{departments[active].caption}</span>
+        </div>
       </div>
     </div>
     <div className="department-scroll-items">

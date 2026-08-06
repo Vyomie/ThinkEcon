@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { DepartmentScroller } from "@/components/department-scroller";
-import { HeroMorph } from "@/components/hero-morph";
 import { LeadershipContacts } from "@/components/leadership-contacts";
 import { getPosts } from "@/lib/blogs";
 import { getEvents, getPodcasts, mediaUrl } from "@/lib/content-api";
@@ -18,7 +17,12 @@ export default async function Home() {
 
   return <main>
     <section className="hero">
-      <HeroMorph />
+      <div className="hero-media" />
+      <div className="hero-shade" />
+      <div className="hero-copy-lockup">
+        <p className="hero-kicker">Student-led economics</p>
+        <h1>Young minds.<br />Public ideas.</h1>
+      </div>
       <div className="hero-bottom"><p>ThinkEconomics is where students research, publish, discuss, and build a sharper view of the world.</p><Link href="/contact" className="cta">Join ThinkEconomics</Link></div>
     </section>
     <section className="ribbon"><div>{Array(3).fill("Research • Editorial • Podcasts • Public Policy • Design • Outreach • ").join("")}</div></section>
