@@ -1,4 +1,4 @@
-html,body{max-width:100%;overflow-x:hidden}
+html,body{max-width:100%;overflow-x:clip}
 .page-hero h1,.article-page h1,.latest h3,.menu-drawer a{overflow-wrap:anywhere}
 @media(max-width:760px){
   .menu-drawer{overflow-y:auto}
