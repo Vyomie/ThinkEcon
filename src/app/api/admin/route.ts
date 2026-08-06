@@ -50,9 +50,8 @@ export async function POST(request: Request) {
   const data = await request.json();
   const isPodcast = data.type === "podcast";
   const isEvent = data.type === "event";
-  const isAnnouncement = data.type === "announcement";
-  const rpc = isPodcast ? "admin_create_podcast" : isEvent ? "admin_create_event" : isAnnouncement ? "admin_create_announcement" : "admin_create_blog";
-  const body = isPodcast ? { new_title: data.title, new_description: data.description, new_video_url: data.videoUrl } : isEvent ? { new_title: data.title, new_description: data.description, new_event_date: data.eventDate || null, new_location: data.location || null, new_image_url: data.imageUrl || null, new_body: data.body || null, new_application_url: data.applicationUrl || null, new_meeting_url: data.meetingUrl || null } : isAnnouncement ? { new_title: data.title, new_summary: data.summary, new_body: data.body, new_cover: data.cover || null } : { new_title: data.title, new_summary: data.summary, new_body: data.body };
+  const rpc = isPodcast ? "admin_create_podcast" : isEvent ? "admin_create_event" : "admin_create_blog";
+  const body = isPodcast ? { new_title: data.title, new_description: data.description, new_video_url: data.videoUrl } : isEvent ? { new_title: data.title, new_description: data.description, new_event_date: data.eventDate || null, new_location: data.location || null, new_image_url: data.imageUrl || null, new_body: data.body || null, new_application_url: data.applicationUrl || null, new_meeting_url: data.meetingUrl || null } : { new_title: data.title, new_summary: data.summary, new_body: data.body };
   const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/${rpc}`, { method: "POST", headers: headers(), body: JSON.stringify(body) });
   return NextResponse.json(response.ok ? await response.json() : { error: "Could not create the item." }, { status: response.ok ? 200 : 500 });
 }

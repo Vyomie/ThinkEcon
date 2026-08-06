@@ -24,5 +24,6 @@ import "./responsive-fixes.css";
 import "./departments-motion.css";
 import "./departments-scroll.css";
 import "./discussion-page.css";
+import "./editorial-redesign.css";
 export const metadata: Metadata = { title: "ThinkEconomics", description: "A student-led community for economics, policy, business, and current affairs." };
 export default function Layout({ children }: { children: React.ReactNode }) { const enabled = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY); const content = <><ScrollReveal/><SiteShell clerkEnabled={enabled}>{children}</SiteShell></>; return <html lang="en"><body>{enabled ? <ClerkProvider>{content}</ClerkProvider> : content}</body></html>; }

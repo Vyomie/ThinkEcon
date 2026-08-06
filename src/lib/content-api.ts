@@ -6,7 +6,15 @@ export type DiscussionReply = { id: string; thread_id: string; body: string; aut
 
 const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-async function query<T>(path: string): Promise<T[]> { if (!base || !key) return []; const response = await fetch(`${base}/rest/v1/${path}`, { headers: { apikey: key }, cache: "no-store" }); return response.ok ? response.json() : []; }
+async function query<T>(path: string): Promise<T[]> {
+  if (!base || !key) return [];
+  try {
+    const response = await fetch(`${base}/rest/v1/${path}`, { headers: { apikey: key }, cache: "no-store", signal: AbortSignal.timeout(8_000) });
+    return response.ok ? response.json() : [];
+  } catch {
+    return [];
+  }
+}
 
 export const getAnnouncements = () => query<Announcement>("announcements?published=eq.true&select=slug,title,summary,body,cover&order=created_at.desc");
 export async function getAnnouncement(slug: string) { return (await getAnnouncements()).find((item) => item.slug === slug) || null; }
